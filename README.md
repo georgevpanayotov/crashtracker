@@ -14,3 +14,5 @@ Requires a conf.json in the following form:
 
 Where, the users are discord user ids and the path is the path part of the webhook URL
 (after discordapp.com).
+
+pre-reqs: [watchdog](https://pypi.org/project/watchdog/)
