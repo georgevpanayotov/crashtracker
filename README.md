@@ -1,6 +1,6 @@
 # CrashTracker
 
-A crash tracker for Civ6 on MacOS. Reports to a discord webhook when civ6 crashes.
+A crash tracker for Civ6 on MacOS and Linux. Reports to a discord webhook when civ6 crashes.
 
 Requires a conf.json in the following form:
 
