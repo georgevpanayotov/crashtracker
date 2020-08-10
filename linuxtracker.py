@@ -24,6 +24,20 @@ def matchCrashDump(line):
     else:
         return None, None
 
+def trackWithFile(kernLog, conf):
+    kernLog.seek(0, os.SEEK_END)
+    while True:
+        line = kernLog.readline()
+
+        if line:
+            line = line.strip()
+            crashTime, machine = matchCrashDump(line)
+            if crashTime:
+                crashtracker.notifyCrashDetected(crashTime, conf)
+        else:
+            time.sleep(1)
+
+
 def track(conf):
     if "debug_crash_path" in conf:
         path = conf["debug_crash_path"]
@@ -32,16 +46,6 @@ def track(conf):
 
     try:
         with open(path) as kernLog:
-            kernLog.seek(0, os.SEEK_END)
-            while True:
-                line = kernLog.readline()
-
-                if line:
-                    line = line.strip()
-                    crashTime, machine = matchCrashDump(line)
-                    if crashTime:
-                        crashtracker.notifyCrashDetected(crashTime, conf)
-                else:
-                    time.sleep(1)
+            trackWithFile(kernLog, conf)
     except KeyboardInterrupt:
         pass
