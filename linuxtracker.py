@@ -33,6 +33,7 @@ def trackWithFile(kernLog, conf):
             line = line.strip()
             crashTime, machine = matchCrashDump(line)
             if crashTime:
+                print(line)
                 crashtracker.notifyCrashDetected(crashTime, conf)
         else:
             time.sleep(1)

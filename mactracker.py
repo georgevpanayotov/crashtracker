@@ -36,9 +36,9 @@ class CrashFileEventHandler(FileSystemEventHandler):
         self.conf = conf
 
     def on_created(self, event):
-        print(event.src_path)
         crashTime, machine = matchCrashDump(event.src_path)
         if crashTime:
+            print(event.src_path)
             crashtracker.notifyCrashDetected(crashTime, self.conf)
 
 def track(conf):
